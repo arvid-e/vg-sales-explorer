@@ -1,0 +1,25 @@
+{
+  "name": "vg-sales-explorer",
+  "version": "1.0.0",
+  "description": "*Replace with the name of your project.*",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/arvid-e/vg-sales-explorer.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "module",
+  "bugs": {
+    "url": "https://github.com/arvid-e/vg-sales-explorer/issues"
+  },
+  "homepage": "https://github.com/arvid-e/vg-sales-explorer#readme",
+  "devDependencies": {
+    "@types/node": "^25.5.0",
+    "typescript": "^6.0.2"
+  }
+}
