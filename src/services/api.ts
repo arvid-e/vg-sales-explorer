@@ -1,4 +1,4 @@
-import { type IGameFilters } from "../interfaces/game";
+import { type IGameFilters, type IGroupedGameSales } from "../interfaces/game";
 
 /**
  * Fetched ranked game sales data from all games with optionals filters.
@@ -35,24 +35,27 @@ export const fetchGameSales = async (filters: IGameFilters = {}) => {
  * Fetches top 15 game sales by genre, platform or publisher.
  * /api/v1/games/stats
  */
-export const fetchGroupedGameSales = async (group: string) => {
-  const params = new URLSearchParams();
-  params.append('groupedBy', group);
-  const queryString = params.toString();
-  
-  const apiUrl = `/api/v1/games/stats${queryString ? `?${queryString}` : ""}`;
+export const fetchGroupedGameSales = async (
+  group: string,
+): Promise<IGroupedGameSales[]> => {
+  const url = new URL("/api/v1/games/stats", window.location.origin);
+  url.searchParams.append("groupBy", group);
 
   try {
-    const response = await fetch(apiUrl);
+    const response = await fetch(url.toString());
 
     if (!response.ok) {
       throw new Error(`HTTP error! status: ${response.status}`);
     }
-
     const games = await response.json();
 
-    return games;
+    if (Array.isArray(games.data)) {
+      return games.data;
+    } else {
+      return [];
+    }
   } catch (error) {
     console.error("Could not fetch game sales:", error);
+    return [];
   }
 };
