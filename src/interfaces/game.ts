@@ -6,3 +6,12 @@ export interface IGameFilters {
   publisher?: string;
 }
 
+export interface IGroupedGameSales {
+  name: string;
+  na: number;
+  eu: number;
+  jp: number;
+  other: number;
+  total: number;
+  count: number;
+}
