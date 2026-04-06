@@ -5,3 +5,4 @@ export interface IGameFilters {
   platform?: string;
   publisher?: string;
 }
+
