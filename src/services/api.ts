@@ -25,7 +25,7 @@ export const fetchGameSales = async (filters: IGameFilters = {}) => {
 
     const games = await response.json();
 
-    return games;
+    return games.data;
   } catch (error) {
     console.error("Could not fetch game sales:", error);
   }

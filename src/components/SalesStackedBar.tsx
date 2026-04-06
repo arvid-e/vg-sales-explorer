@@ -1,3 +1,4 @@
+import type { ActiveElement, ChartEvent } from "chart.js";
 import {
   BarElement,
   CategoryScale,
@@ -23,9 +24,10 @@ ChartJS.register(
 
 interface SalesStackedBarProps {
   group: string;
+  onBarClick: (name: string) => void;
 }
 
-function SalesStackedBar({ group }: SalesStackedBarProps) {
+function SalesStackedBar({ group, onBarClick }: SalesStackedBarProps) {
   const [stats, setStats] = useState<IGroupedGameSales[]>([]);
   const [loading, setLoading] = useState(true);
 
@@ -51,17 +53,17 @@ function SalesStackedBar({ group }: SalesStackedBarProps) {
       {
         label: "North America",
         data: stats.map((item) => item.na),
-        backgroundColor: "rgba(54, 162, 235, 0.8)",
+        backgroundColor: "rgba(3, 130, 204, 0.8)",
       },
       {
         label: "Europe",
         data: stats.map((item) => item.eu),
-        backgroundColor: "rgba(75, 192, 192, 0.8)",
+        backgroundColor: "rgba(0, 39, 167, 0.8)",
       },
       {
         label: "Japan",
         data: stats.map((item) => item.jp),
-        backgroundColor: "rgba(255, 99, 132, 0.8)",
+        backgroundColor: "rgba(245, 52, 94, 0.8)",
       },
       {
         label: "Other",
@@ -80,6 +82,14 @@ function SalesStackedBar({ group }: SalesStackedBarProps) {
     scales: {
       x: { stacked: true },
       y: { stacked: true },
+    },
+    onClick: (event: ChartEvent, elements: ActiveElement[]) => {
+      if (elements.length > 0) {
+        const index = elements[0].index;
+        const clickedLabel = stats[index].name;
+
+        onBarClick(clickedLabel);
+      }
     },
   };
 
