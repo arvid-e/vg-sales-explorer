@@ -1,4 +1,8 @@
-import { type IGameFilters, type IGroupedGameSales } from "../interfaces/game";
+import {
+  type IGameDetails,
+  type IGameFilters,
+  type IGroupedGameSales,
+} from "../interfaces/game";
 
 /**
  * Fetched ranked game sales data from all games with optionals filters.
@@ -28,6 +32,27 @@ export const fetchGameSales = async (filters: IGameFilters = {}) => {
     return games.data;
   } catch (error) {
     console.error("Could not fetch game sales:", error);
+  }
+};
+
+/**
+ * Fetch sales details about a single game.
+ */
+export const fetchGameDetails = async (id: string): Promise<IGameDetails> => {
+  const url = new URL(`/api/v1/games/${id}`, window.location.origin);
+
+  try {
+    const response = await fetch(url);
+
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+    const data = await response.json();
+
+    return Array.isArray(data) ? data[0].data : data.data;
+  } catch (error) {
+    console.error("Could not fetch game sales:", error);
+    throw error;
   }
 };
 
@@ -77,7 +102,7 @@ export const semanticSearch = async (search: string) => {
     const games = await response.json();
 
     if (Array.isArray(games.data)) {
-      return games.data
+      return games.data;
     } else {
       return [];
     }
