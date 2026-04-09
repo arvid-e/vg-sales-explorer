@@ -61,11 +61,12 @@ export const fetchGroupedGameSales = async (
 };
 
 /**
- * Search for individual games using Elastic Search.
+ * Search for individual games using Semantic Search.
  */
-export const elasticSearch = async (search: string) => {
+export const semanticSearch = async (search: string) => {
   const url = new URL("/api/v1/games", window.location.origin);
   url.searchParams.append("search", search);
+  url.searchParams.append("limit", "20");
 
   try {
     const response = await fetch(url.toString());
@@ -76,7 +77,7 @@ export const elasticSearch = async (search: string) => {
     const games = await response.json();
 
     if (Array.isArray(games.data)) {
-      return games.data;
+      return games.data
     } else {
       return [];
     }
