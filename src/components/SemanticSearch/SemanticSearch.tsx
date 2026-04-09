@@ -1,3 +1,4 @@
+import type { ActiveElement, ChartEvent } from "chart.js";
 import {
   BarElement,
   CategoryScale,
@@ -23,9 +24,10 @@ ChartJS.register(
 
 interface ElasticSearchProps {
   searchQuery: string;
+  onGameClick: (gameId: string) => void;
 }
 
-function SemanticSearch({ searchQuery }: ElasticSearchProps) {
+function SemanticSearch({ searchQuery, onGameClick }: ElasticSearchProps) {
   const [details, setDetails] = useState<IGameDetails[]>([]);
   const [loading, setLoading] = useState(false);
 
@@ -65,6 +67,26 @@ function SemanticSearch({ searchQuery }: ElasticSearchProps) {
     indexAxis: "y" as const,
     responsive: true,
     maintainAspectRatio: false,
+    onHover: (event: ChartEvent, elements: ActiveElement[]) => {
+      const target = event.native?.target as HTMLElement;
+      if (target) {
+        target.style.cursor = elements.length > 0 ? "pointer" : "default";
+      }
+    },
+    onClick: (event: ChartEvent, elements: ActiveElement[]) => {
+      if (elements.length > 0) {
+        const index = elements[0].index;
+        const selectedGame = details[index];
+
+        const gameId = selectedGame.gameId;
+
+        if (gameId) {
+          onGameClick(gameId);
+        } else {
+          console.error("Could not find an ID on this game object.");
+        }
+      }
+    },
     plugins: {
       legend: { display: false },
       title: {
@@ -79,20 +101,10 @@ function SemanticSearch({ searchQuery }: ElasticSearchProps) {
     },
   };
 
-  if (loading) {
+  if (loading)
     return (
-      <div
-        style={{
-          background: "#0a0a0a",
-          padding: "2rem",
-          borderRadius: "12px",
-          textAlign: "center",
-        }}
-      >
-        <div style={{ color: "#10b981" }}>Searching...</div>
-      </div>
+      <div style={{ textAlign: "center", color: "#10b981" }}>Searching...</div>
     );
-  }
 
   return (
     <div
@@ -103,7 +115,7 @@ function SemanticSearch({ searchQuery }: ElasticSearchProps) {
           <Bar data={data} options={options} />
         </div>
       ) : (
-        <p style={{ color: "#737373" }}>No results found for "{searchQuery}"</p>
+        <p style={{ color: "#737373" }}>No results found.</p>
       )}
     </div>
   );

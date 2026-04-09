@@ -1,5 +1,5 @@
 export interface IGameDetails {
-  _id: string;
+  gameId: string;
   rank: number;
   name: string;
   platform: {
