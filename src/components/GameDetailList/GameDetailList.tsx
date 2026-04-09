@@ -27,6 +27,19 @@ interface GameDetailListProps {
   filters: IGameFilters;
 }
 
+const getTitleByFilter = (filters: IGameFilters) => {
+  let filter = "";
+  if (filters.genre) {
+    filter = `in ${filters.genre}`;
+  } else if (filters.platform) {
+    filter = `on ${filters.platform}`;
+  } else if (filters.publisher) {
+    filter = `by ${filters.publisher}`;
+  }
+
+  return `Top 15 Games ${filter}`;
+};
+
 function GameDetailList({ filters }: GameDetailListProps) {
   const [details, setDetails] = useState<IGameDetails[]>([]);
   const [loading, setLoading] = useState(true);
@@ -67,7 +80,11 @@ function GameDetailList({ filters }: GameDetailListProps) {
   const options = {
     indexAxis: "y" as const,
     plugins: {
-      title: { color: "#ffffff", display: true, text: "Top Performing Games" },
+      title: {
+        color: "#ffffff",
+        display: true,
+        text: getTitleByFilter(filters),
+      },
       legend: { display: false },
     },
     scales: {
