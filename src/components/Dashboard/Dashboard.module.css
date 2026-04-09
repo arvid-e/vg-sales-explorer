@@ -1,0 +1,84 @@
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem 1.5rem;
+  font-family:
+    system-ui,
+    -apple-system,
+    sans-serif;
+  background-color: #050505;
+  color: #a3a3a3;
+  min-height: 100vh;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid #194011;
+}
+
+.title {
+  margin: 0;
+  font-size: 1.75rem;
+  color: #e6f1ff;
+}
+
+.selectInput {
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  background-color: #121212;
+  border: 1px solid #35750a;
+  color: #10b981;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+.selectInput:focus {
+  outline: none;
+  border-color: #64ffda;
+}
+
+.overviewSection {
+  background: #0a0a0a;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 1);
+  border-radius: 12px;
+  padding: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.detailSection {
+  padding: 1.5rem;
+  background: #0a0a0a;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 1);
+  border-radius: 12px;
+  min-height: 200px;
+}
+
+.clearButton {
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  background-color: #121212;
+  border: 1px solid #35750a;
+  color: #10b981;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+.clearButton:hover {
+  background-color: #396e4a;
+}
+
+.emptyState {
+  color: #8892b0;
+  font-style: italic;
+  text-align: center;
+  margin-top: 2rem;
+}
+
+.menu {
+  display: flex;
+  gap: 10px;
+}

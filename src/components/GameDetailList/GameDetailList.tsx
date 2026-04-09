@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
-import type { IGameDetails, IGameFilters } from "../interfaces/game";
-import { fetchGameSales } from "../services/api";
+import type { IGameDetails, IGameFilters } from "../../interfaces/game";
+import { fetchGameSales } from "../../services/api";
+import styles from "./GameDetailList.module.css";
 
 import {
   BarElement,
@@ -50,42 +51,41 @@ function GameDetailList({ filters }: GameDetailListProps) {
     .slice(0, 15);
 
   const chartData = {
-    labels: topGames.map((game) => `${game.name} (${game.platform.name})`),
+    labels: topGames.map((game) => game.name),
     datasets: [
       {
-        label: "Global Sales (Millions)",
+        label: "Global Sales",
         data: topGames.map((game) => game.sales.global),
-        backgroundColor: "rgba(101, 219, 255, 0.6)",
-        borderColor: "rgba(75, 192, 192, 1)",
+        backgroundColor: "rgba(16, 185, 129, 0.7)",
+        borderColor: "#10b981",
         borderWidth: 1,
+        hoverBackgroundColor: "#10b981",
       },
     ],
   };
 
   const options = {
     indexAxis: "y" as const,
-    responsive: true,
     plugins: {
+      title: { color: "#ffffff", display: true, text: "Top Performing Games" },
       legend: { display: false },
-      title: {
-        display: true,
-        text: `Top 15 Games in ${Object.values(filters)[0] || "Selection"}`,
-      },
+    },
+    scales: {
+      x: { grid: { color: "#1a1a1a" }, ticks: { color: "#d6d2d2ff" } },
+      y: { grid: { display: false }, ticks: { color: "#c2c1c1ff" } },
     },
   };
 
   if (loading) return <div>Loading details...</div>;
 
   return (
-    <div className="detail-view">
+    <div className={styles.detailContainer}>
       {details.length > 0 ? (
-        <>
-          <div style={{ height: "600px", marginBottom: "2rem" }}>
-            <Bar data={chartData} options={options} />
-          </div>
-        </>
+        <div className={styles.chartWrapper}>
+          <Bar data={chartData} options={options} />
+        </div>
       ) : (
-        <p>No games found for this filter.</p>
+        <p className={styles.noData}>No games found for this filter.</p>
       )}
     </div>
   );

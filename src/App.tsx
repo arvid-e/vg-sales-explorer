@@ -1,4 +1,5 @@
-import Dashboard from "./components/Dashboard";
+import './globals.css'; 
+import Dashboard from "./components/Dashboard/Dashboard";
 
 function App() {
   return <Dashboard />;
