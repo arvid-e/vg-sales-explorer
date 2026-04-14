@@ -8,10 +8,10 @@ import styles from "./GameDetails.module.css";
 ChartJS.register(ArcElement, Tooltip, Legend, Title);
 
 interface IGameDetailsProps {
-  userId: string;
+  gameId: string;
 }
 
-function GameDetails({ userId }: IGameDetailsProps) {
+function GameDetails({ gameId }: IGameDetailsProps) {
   const [details, setDetails] = useState<IGameDetails | null>(null);
   const [loading, setLoading] = useState(false);
 
@@ -19,7 +19,7 @@ function GameDetails({ userId }: IGameDetailsProps) {
     const getData = async () => {
       try {
         setLoading(true);
-        const response = await fetchGameDetails(userId);
+        const response = await fetchGameDetails(gameId);
         setDetails(response);
       } catch (error) {
         console.error("API failed", error);
@@ -28,7 +28,7 @@ function GameDetails({ userId }: IGameDetailsProps) {
       }
     };
     getData();
-  }, [userId]);
+  }, [gameId]);
 
   if (loading)
     return <div className={styles.loading}>Searching database...</div>;

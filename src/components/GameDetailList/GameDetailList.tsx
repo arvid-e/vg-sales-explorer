@@ -11,6 +11,8 @@ import {
   LinearScale,
   Title,
   Tooltip,
+  type ActiveElement,
+  type ChartEvent,
 } from "chart.js";
 import { Bar } from "react-chartjs-2";
 
@@ -25,6 +27,7 @@ ChartJS.register(
 
 interface GameDetailListProps {
   filters: IGameFilters;
+  onBarClick: (gameId: string) => void;
 }
 
 const getTitleByFilter = (filters: IGameFilters) => {
@@ -40,7 +43,7 @@ const getTitleByFilter = (filters: IGameFilters) => {
   return `Top 15 Games ${filter}`;
 };
 
-function GameDetailList({ filters }: GameDetailListProps) {
+function GameDetailList({ filters, onBarClick }: GameDetailListProps) {
   const [details, setDetails] = useState<IGameDetails[]>([]);
   const [loading, setLoading] = useState(true);
 
@@ -90,6 +93,25 @@ function GameDetailList({ filters }: GameDetailListProps) {
     scales: {
       x: { grid: { color: "#1a1a1a" }, ticks: { color: "#d6d2d2ff" } },
       y: { grid: { display: false }, ticks: { color: "#c2c1c1ff" } },
+    },
+    onHover: (event: ChartEvent, elements: ActiveElement[]) => {
+      const target = event.native?.target as HTMLElement;
+
+      if (target) {
+        target.style.cursor = elements.length > 0 ? "pointer" : "default";
+      }
+    },
+    onClick: (event: ChartEvent, elements: ActiveElement[]) => {
+      if (elements.length > 0) {
+        const index = elements[0].index;
+        const clickedId = topGames[index].gameId;
+
+        if (clickedId) {
+          onBarClick(clickedId);
+        } else {
+          console.error("No gameId found for index:", index);
+        }
+      }
     },
   };
 

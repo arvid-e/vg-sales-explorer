@@ -82,7 +82,7 @@ function Dashboard() {
             >
               ← Back to Results
             </button>
-            <GameDetails userId={selectedGameId} />
+            <GameDetails gameId={selectedGameId} />
           </section>
         ) : triggeredSearch ? (
           /* SEARCH RESULTS VIEW */
@@ -115,7 +115,19 @@ function Dashboard() {
 
             <section className={styles.detailSection}>
               {Object.keys(activeFilters).length > 0 ? (
-                <GameDetailList filters={activeFilters} />
+                <GameDetailList
+                  filters={activeFilters}
+                  onBarClick={(id) => {
+                    if (id) {
+                      console.log("Navigating to Game ID:", id);
+                      setSelectedGameId(id);
+                    } else {
+                      console.error(
+                        "Error: Received an undefined ID from the chart click.",
+                      );
+                    }
+                  }}
+                />
               ) : (
                 <p className={styles.emptyState}>
                   Click on a bar to see details.
