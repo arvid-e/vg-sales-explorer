@@ -1,0 +1,61 @@
+.container {
+  background-color: #0a0a0a;
+  padding: 2rem;
+  border-radius: 12px;
+  color: #fff;
+  width: 1150px;
+}
+
+.title {
+  margin-bottom: 1.5rem;
+  color: #10b981;
+}
+
+.tableWrapper {
+  overflow-x: auto;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+}
+
+.headerRow {
+  border-bottom: 1px solid #333;
+  color: #737373;
+}
+
+.headerCell {
+  padding: 12px;
+}
+
+.row {
+  border-bottom: 1px solid #1a1a1a;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.row:hover {
+  background-color: #292828;
+}
+
+.cell {
+  padding: 12px;
+}
+
+.nameCell {
+  font-weight: bold;
+}
+
+.platformCell {
+  color: #bebcbc;
+}
+
+.salesCell {
+  color: #10b981;
+}
+
+.noResults {
+  color: #737373;
+}
