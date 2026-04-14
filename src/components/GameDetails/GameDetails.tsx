@@ -47,7 +47,7 @@ function GameDetails({ userId }: IGameDetailsProps) {
           details.sales.jp,
           details.sales.other,
         ],
-        backgroundColor: ["#10b981", "#059669", "#064e3b", "#262626"],
+        backgroundColor: ["#11e29dff", "#059669", "#064e3b", "#5a5a5aff"],
         borderWidth: 2,
         borderColor: "#0a0a0a",
         hoverOffset: 15,

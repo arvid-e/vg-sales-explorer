@@ -1,8 +1,14 @@
 .detailsContainer {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
   background: #0a0a0a;
   border-radius: 16px;
   padding: 2rem;
-  border: 1px solid #1a1a1a;
+  border: 1px solid #3a5533;
+  box-shadow:
+    0 10px 25px -5px rgba(54, 233, 9, 0.212),
+    0 8px 10px -6px rgba(8, 216, 18, 0.411);
   color: #ffffff;
 }
 
@@ -36,11 +42,12 @@
   background: #121212;
   border-radius: 12px;
   margin-bottom: 2rem;
+  border: 1px solid #3a5533;
 }
 
 .metaGrid label {
   display: block;
-  color: #525252;
+  color: #868484;
   font-size: 0.75rem;
   text-transform: uppercase;
   margin-bottom: 4px;
@@ -76,6 +83,6 @@
 
 .totalLabel {
   font-size: 0.75rem;
-  color: #525252;
+  color: #929090;
   text-transform: uppercase;
 }
