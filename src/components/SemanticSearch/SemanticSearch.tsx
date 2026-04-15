@@ -9,7 +9,7 @@ import {
 } from "chart.js";
 import { useEffect, useState } from "react";
 import type { IGameDetails } from "../../interfaces/game";
-import { semanticSearch } from "../../services/api";
+import { semanticSearch } from "../../services/semantic-search";
 import styles from "./SemanticSearch.module.css";
 
 ChartJS.register(
