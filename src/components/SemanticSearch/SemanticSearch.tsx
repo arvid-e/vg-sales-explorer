@@ -26,6 +26,9 @@ interface ElasticSearchProps {
   onGameClick: (gameId: string) => void;
 }
 
+/**
+ * Component that displays search results of individual games using semantic search.
+ */
 function SemanticSearch({ searchQuery, onGameClick }: ElasticSearchProps) {
   const [details, setDetails] = useState<IGameDetails[]>([]);
   const [loading, setLoading] = useState(false);

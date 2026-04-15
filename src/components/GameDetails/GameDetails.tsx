@@ -11,6 +11,9 @@ interface IGameDetailsProps {
   gameId: string;
 }
 
+/**
+ * Component displaying a detailed view about a single game.
+ */
 function GameDetails({ gameId }: IGameDetailsProps) {
   const [details, setDetails] = useState<IGameDetails | null>(null);
   const [loading, setLoading] = useState(false);

@@ -30,6 +30,7 @@ interface GameDetailListProps {
   onBarClick: (gameId: string) => void;
 }
 
+// Get title depending on current filter.
 const getTitleByFilter = (filters: IGameFilters) => {
   let filter = "";
   if (filters.genre) {
@@ -43,6 +44,9 @@ const getTitleByFilter = (filters: IGameFilters) => {
   return `Top 15 Games ${filter}`;
 };
 
+/**
+ * Component displaying a sales list of the top 15 games by genre, platform or publisher.
+ */
 function GameDetailList({ filters, onBarClick }: GameDetailListProps) {
   const [details, setDetails] = useState<IGameDetails[]>([]);
   const [loading, setLoading] = useState(true);

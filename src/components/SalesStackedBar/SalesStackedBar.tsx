@@ -28,6 +28,9 @@ interface SalesStackedBarProps {
   onBarClick: (name: string) => void;
 }
 
+/**
+ * Component displaying a stacked bar graph of the top 15 game sales by genre, platform or publisher.
+ */
 function SalesStackedBar({ group, onBarClick }: SalesStackedBarProps) {
   const [stats, setStats] = useState<IGroupedGameSales[]>([]);
   const [loading, setLoading] = useState(true);
@@ -48,6 +51,7 @@ function SalesStackedBar({ group, onBarClick }: SalesStackedBarProps) {
     getData();
   }, [group]);
 
+  // Graph data
   const data = {
     labels: stats.map((item) => item.name),
     datasets: [
@@ -78,6 +82,7 @@ function SalesStackedBar({ group, onBarClick }: SalesStackedBarProps) {
     ],
   };
 
+  // Graph options
   const options = {
     responsive: true,
     maintainAspectRatio: false,

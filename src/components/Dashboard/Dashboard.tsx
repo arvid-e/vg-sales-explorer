@@ -6,6 +6,9 @@ import SalesStackedBar from "../SalesStackedBar/SalesStackedBar";
 import SemanticSearch from "../SemanticSearch/SemanticSearch";
 import styles from "./Dashboard.module.css";
 
+/**
+ * Dashboard component that contains the different data visualisation components.
+ */
 function Dashboard() {
   const [currentGroup, setCurrentGroup] = useState<string>("genre");
   const [activeFilters, setActiveFilters] = useState<IGameFilters>({});
