@@ -1,8 +1,3 @@
-import { useEffect, useState } from "react";
-import type { IGameDetails, IGameFilters } from "../../interfaces/game";
-import { fetchGameSales } from "../../services/api";
-import styles from "./GameDetailList.module.css";
-
 import {
   BarElement,
   CategoryScale,
@@ -13,8 +8,14 @@ import {
   Tooltip,
   type ActiveElement,
   type ChartEvent,
-} from "chart.js";
-import { Bar } from "react-chartjs-2";
+} from 'chart.js';
+import { useEffect, useState } from 'react';
+import { Bar } from 'react-chartjs-2';
+
+import type { IGameDetails, IGameFilters } from '../../interfaces/game';
+import { fetchGameSales } from '../../services/api';
+
+import styles from './GameDetailList.module.css';
 
 ChartJS.register(
   CategoryScale,
@@ -32,7 +33,7 @@ interface GameDetailListProps {
 
 // Get title depending on current filter.
 const getTitleByFilter = (filters: IGameFilters) => {
-  let filter = "";
+  let filter = '';
   if (filters.genre) {
     filter = `in ${filters.genre}`;
   } else if (filters.platform) {
@@ -58,7 +59,7 @@ function GameDetailList({ filters, onBarClick }: GameDetailListProps) {
         const response = await fetchGameSales(filters);
         setDetails(response);
       } catch (error) {
-        console.error("API failed", error);
+        console.error('API failed', error);
       } finally {
         setLoading(false);
       }
@@ -74,35 +75,35 @@ function GameDetailList({ filters, onBarClick }: GameDetailListProps) {
     labels: topGames.map((game) => game.name),
     datasets: [
       {
-        label: "Global Sales",
+        label: 'Global Sales',
         data: topGames.map((game) => game.sales.global),
-        backgroundColor: "rgba(16, 185, 129, 0.7)",
-        borderColor: "#10b981",
+        backgroundColor: 'rgba(16, 185, 129, 0.7)',
+        borderColor: '#10b981',
         borderWidth: 1,
-        hoverBackgroundColor: "#10b981",
+        hoverBackgroundColor: '#10b981',
       },
     ],
   };
 
   const options = {
-    indexAxis: "y" as const,
+    indexAxis: 'y' as const,
     plugins: {
       title: {
-        color: "#ffffff",
+        color: '#ffffff',
         display: true,
         text: getTitleByFilter(filters),
       },
       legend: { display: false },
     },
     scales: {
-      x: { grid: { color: "#1a1a1a" }, ticks: { color: "#d6d2d2ff" } },
-      y: { grid: { display: false }, ticks: { color: "#c2c1c1ff" } },
+      x: { grid: { color: '#1a1a1a' }, ticks: { color: '#d6d2d2ff' } },
+      y: { grid: { display: false }, ticks: { color: '#c2c1c1ff' } },
     },
     onHover: (event: ChartEvent, elements: ActiveElement[]) => {
       const target = event.native?.target as HTMLElement;
 
       if (target) {
-        target.style.cursor = elements.length > 0 ? "pointer" : "default";
+        target.style.cursor = elements.length > 0 ? 'pointer' : 'default';
       }
     },
     onClick: (event: ChartEvent, elements: ActiveElement[]) => {
@@ -113,7 +114,7 @@ function GameDetailList({ filters, onBarClick }: GameDetailListProps) {
         if (clickedId) {
           onBarClick(clickedId);
         } else {
-          console.error("No gameId found for index:", index);
+          console.error('No gameId found for index:', index);
         }
       }
     },

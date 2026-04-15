@@ -2,7 +2,7 @@ import {
   type IGameDetails,
   type IGameFilters,
   type IGroupedGameSales,
-} from "../interfaces/game";
+} from '../interfaces/game';
 
 /**
  * Fetched ranked game sales data from all games with optionals filters.
@@ -18,7 +18,7 @@ export const fetchGameSales = async (filters: IGameFilters = {}) => {
   });
 
   const queryString = params.toString();
-  const apiUrl = `/api/v1/games${queryString ? `?${queryString}` : ""}`;
+  const apiUrl = `/api/v1/games${queryString ? `?${queryString}` : ''}`;
 
   try {
     const response = await fetch(apiUrl);
@@ -31,7 +31,7 @@ export const fetchGameSales = async (filters: IGameFilters = {}) => {
 
     return games.data;
   } catch (error) {
-    console.error("Could not fetch game sales:", error);
+    console.error('Could not fetch game sales:', error);
   }
 };
 
@@ -51,7 +51,7 @@ export const fetchGameDetails = async (id: string): Promise<IGameDetails> => {
 
     return Array.isArray(data) ? data[0].data : data.data;
   } catch (error) {
-    console.error("Could not fetch game sales:", error);
+    console.error('Could not fetch game sales:', error);
     throw error;
   }
 };
@@ -63,8 +63,8 @@ export const fetchGameDetails = async (id: string): Promise<IGameDetails> => {
 export const fetchGroupedGameSales = async (
   group: string,
 ): Promise<IGroupedGameSales[]> => {
-  const url = new URL("/api/v1/games/stats", window.location.origin);
-  url.searchParams.append("groupBy", group);
+  const url = new URL('/api/v1/games/stats', window.location.origin);
+  url.searchParams.append('groupBy', group);
 
   try {
     const response = await fetch(url.toString());
@@ -80,7 +80,7 @@ export const fetchGroupedGameSales = async (
       return [];
     }
   } catch (error) {
-    console.error("Could not fetch game sales:", error);
+    console.error('Could not fetch game sales:', error);
     return [];
   }
 };

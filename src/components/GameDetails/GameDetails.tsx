@@ -1,9 +1,11 @@
-import { ArcElement, Chart as ChartJS, Legend, Title, Tooltip } from "chart.js";
-import { useEffect, useState } from "react";
-import { Doughnut } from "react-chartjs-2";
-import type { IGameDetails } from "../../interfaces/game";
-import { fetchGameDetails } from "../../services/api";
-import styles from "./GameDetails.module.css";
+import { ArcElement, Chart as ChartJS, Legend, Title, Tooltip } from 'chart.js';
+import { useEffect, useState } from 'react';
+import { Doughnut } from 'react-chartjs-2';
+
+import type { IGameDetails } from '../../interfaces/game';
+import { fetchGameDetails } from '../../services/api';
+
+import styles from './GameDetails.module.css';
 
 ChartJS.register(ArcElement, Tooltip, Legend, Title);
 
@@ -25,7 +27,7 @@ function GameDetails({ gameId }: IGameDetailsProps) {
         const response = await fetchGameDetails(gameId);
         setDetails(response);
       } catch (error) {
-        console.error("API failed", error);
+        console.error('API failed', error);
       } finally {
         setLoading(false);
       }
@@ -41,7 +43,7 @@ function GameDetails({ gameId }: IGameDetailsProps) {
   }
 
   const chartData = {
-    labels: ["North America", "Europe", "Japan", "Other"],
+    labels: ['North America', 'Europe', 'Japan', 'Other'],
     datasets: [
       {
         data: [
@@ -50,9 +52,9 @@ function GameDetails({ gameId }: IGameDetailsProps) {
           details.sales.jp,
           details.sales.other,
         ],
-        backgroundColor: ["#11e29dff", "#059669", "#064e3b", "#5a5a5aff"],
+        backgroundColor: ['#11e29dff', '#059669', '#064e3b', '#5a5a5aff'],
         borderWidth: 2,
-        borderColor: "#0a0a0a",
+        borderColor: '#0a0a0a',
         hoverOffset: 15,
       },
     ],
@@ -63,13 +65,13 @@ function GameDetails({ gameId }: IGameDetailsProps) {
     maintainAspectRatio: false,
     plugins: {
       legend: {
-        position: "bottom" as const,
-        labels: { color: "#a3a3a3", padding: 20, usePointStyle: true },
+        position: 'bottom' as const,
+        labels: { color: '#a3a3a3', padding: 20, usePointStyle: true },
       },
       title: {
         display: true,
-        text: "Regional Sales Breakdown",
-        color: "#ffffff",
+        text: 'Regional Sales Breakdown',
+        color: '#ffffff',
         font: { size: 16 },
       },
     },

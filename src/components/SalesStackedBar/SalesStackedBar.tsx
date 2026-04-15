@@ -1,4 +1,4 @@
-import type { ActiveElement, ChartEvent } from "chart.js";
+import type { ActiveElement, ChartEvent } from 'chart.js';
 import {
   BarElement,
   CategoryScale,
@@ -7,12 +7,14 @@ import {
   LinearScale,
   Title,
   Tooltip,
-} from "chart.js";
-import { useEffect, useState } from "react";
-import { Bar } from "react-chartjs-2";
-import type { IGroupedGameSales } from "../../interfaces/game";
-import { fetchGroupedGameSales } from "../../services/api";
-import styles from "./SalesStackedBar.module.css";
+} from 'chart.js';
+import { useEffect, useState } from 'react';
+import { Bar } from 'react-chartjs-2';
+
+import type { IGroupedGameSales } from '../../interfaces/game';
+import { fetchGroupedGameSales } from '../../services/api';
+
+import styles from './SalesStackedBar.module.css';
 
 ChartJS.register(
   CategoryScale,
@@ -42,7 +44,7 @@ function SalesStackedBar({ group, onBarClick }: SalesStackedBarProps) {
         const response = await fetchGroupedGameSales(group);
         setStats(response);
       } catch (error) {
-        console.error("API failed", error);
+        console.error('API failed', error);
       } finally {
         setLoading(false);
       }
@@ -56,27 +58,27 @@ function SalesStackedBar({ group, onBarClick }: SalesStackedBarProps) {
     labels: stats.map((item) => item.name),
     datasets: [
       {
-        label: "North America",
+        label: 'North America',
         data: stats.map((item) => item.na),
-        backgroundColor: "#11e29dff",
+        backgroundColor: '#11e29dff',
         borderWidth: 0,
       },
       {
-        label: "Europe",
+        label: 'Europe',
         data: stats.map((item) => item.eu),
-        backgroundColor: "#059669",
+        backgroundColor: '#059669',
         borderWidth: 0,
       },
       {
-        label: "Japan",
+        label: 'Japan',
         data: stats.map((item) => item.jp),
-        backgroundColor: "#064e3b",
+        backgroundColor: '#064e3b',
         borderWidth: 0,
       },
       {
-        label: "Other",
+        label: 'Other',
         data: stats.map((item) => item.other),
-        backgroundColor: "#5a5a5aff",
+        backgroundColor: '#5a5a5aff',
         borderWidth: 0,
       },
     ],
@@ -96,20 +98,20 @@ function SalesStackedBar({ group, onBarClick }: SalesStackedBarProps) {
     },
     plugins: {
       legend: {
-        position: "top" as const,
-        align: "center" as const,
+        position: 'top' as const,
+        align: 'center' as const,
         labels: {
-          color: "#a5a2a2ff",
+          color: '#a5a2a2ff',
           usePointStyle: true,
-          pointStyle: "circle",
+          pointStyle: 'circle',
           padding: 20,
         },
       },
       title: {
         display: true,
-        text: "Global Sales Distribution",
-        color: "#ffffff",
-        font: { size: 18, weight: "bold" as const },
+        text: 'Global Sales Distribution',
+        color: '#ffffff',
+        font: { size: 18, weight: 'bold' as const },
         padding: { bottom: 20 },
       },
     },
@@ -117,15 +119,15 @@ function SalesStackedBar({ group, onBarClick }: SalesStackedBarProps) {
       x: {
         stacked: true,
         grid: { display: false },
-        ticks: { color: "#c9c9c9ff" },
+        ticks: { color: '#c9c9c9ff' },
       },
       y: {
         stacked: true,
         grid: {
-          color: "#171717",
+          color: '#171717',
         },
         ticks: {
-          color: "#c7c7c7ff",
+          color: '#c7c7c7ff',
         },
       },
     },
@@ -133,7 +135,7 @@ function SalesStackedBar({ group, onBarClick }: SalesStackedBarProps) {
       const target = event.native?.target as HTMLElement;
 
       if (target) {
-        target.style.cursor = elements.length > 0 ? "pointer" : "default";
+        target.style.cursor = elements.length > 0 ? 'pointer' : 'default';
       }
     },
     onClick: (event: ChartEvent, elements: ActiveElement[]) => {

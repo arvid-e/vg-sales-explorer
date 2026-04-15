@@ -6,11 +6,13 @@ import {
   LinearScale,
   Title,
   Tooltip,
-} from "chart.js";
-import { useEffect, useState } from "react";
-import type { IGameDetails } from "../../interfaces/game";
-import { semanticSearch } from "../../services/semantic-search";
-import styles from "./SemanticSearch.module.css";
+} from 'chart.js';
+import { useEffect, useState } from 'react';
+
+import type { IGameDetails } from '../../interfaces/game';
+import { semanticSearch } from '../../services/semantic-search';
+
+import styles from './SemanticSearch.module.css';
 
 ChartJS.register(
   CategoryScale,
@@ -41,7 +43,7 @@ function SemanticSearch({ searchQuery, onGameClick }: ElasticSearchProps) {
         const response = await semanticSearch(searchQuery);
         setDetails(response);
       } catch (error) {
-        console.error("Search failed", error);
+        console.error('Search failed', error);
       } finally {
         setLoading(false);
       }
@@ -52,7 +54,7 @@ function SemanticSearch({ searchQuery, onGameClick }: ElasticSearchProps) {
 
   if (loading)
     return (
-      <div style={{ textAlign: "center", color: "#10b981" }}>Searching...</div>
+      <div style={{ textAlign: 'center', color: '#10b981' }}>Searching...</div>
     );
 
   return (
@@ -80,7 +82,7 @@ function SemanticSearch({ searchQuery, onGameClick }: ElasticSearchProps) {
                     {game.name}
                   </td>
                   <td className={`${styles.cell} ${styles.platformCell}`}>
-                    {game.platform?.name || "Unknown"}
+                    {game.platform?.name || 'Unknown'}
                   </td>
                   <td className={`${styles.cell} ${styles.salesCell}`}>
                     {game.sales.global.toLocaleString()}

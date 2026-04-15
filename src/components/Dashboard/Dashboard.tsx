@@ -1,19 +1,21 @@
-import { useState } from "react";
-import type { IGameFilters } from "../../interfaces/game";
-import GameDetailList from "../GameDetailList/GameDetailList";
-import GameDetails from "../GameDetails/GameDetails";
-import SalesStackedBar from "../SalesStackedBar/SalesStackedBar";
-import SemanticSearch from "../SemanticSearch/SemanticSearch";
-import styles from "./Dashboard.module.css";
+import { useState } from 'react';
+
+import type { IGameFilters } from '../../interfaces/game';
+import GameDetailList from '../GameDetailList/GameDetailList';
+import GameDetails from '../GameDetails/GameDetails';
+import SalesStackedBar from '../SalesStackedBar/SalesStackedBar';
+import SemanticSearch from '../SemanticSearch/SemanticSearch';
+
+import styles from './Dashboard.module.css';
 
 /**
  * Dashboard component that contains the different data visualisation components.
  */
 function Dashboard() {
-  const [currentGroup, setCurrentGroup] = useState<string>("genre");
+  const [currentGroup, setCurrentGroup] = useState<string>('genre');
   const [activeFilters, setActiveFilters] = useState<IGameFilters>({});
-  const [searchQuery, setSearchQuery] = useState<string>("");
-  const [triggeredSearch, setTriggeredSearch] = useState<string>("");
+  const [searchQuery, setSearchQuery] = useState<string>('');
+  const [triggeredSearch, setTriggeredSearch] = useState<string>('');
   const [selectedGameId, setSelectedGameId] = useState<string | null>(null);
 
   const handleSearchClick = () => {
@@ -24,8 +26,8 @@ function Dashboard() {
 
   const handleClearAll = () => {
     setActiveFilters({});
-    setTriggeredSearch("");
-    setSearchQuery("");
+    setTriggeredSearch('');
+    setSearchQuery('');
     setSelectedGameId(null);
   };
 
@@ -35,7 +37,7 @@ function Dashboard() {
         <h1
           className={styles.title}
           onClick={handleClearAll}
-          style={{ cursor: "pointer" }}
+          style={{ cursor: 'pointer' }}
         >
           Game Sales Analytics
         </h1>
@@ -48,7 +50,7 @@ function Dashboard() {
               placeholder="Search for a game..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              onKeyDown={(e) => e.key === "Enter" && handleSearchClick()}
+              onKeyDown={(e) => e.key === 'Enter' && handleSearchClick()}
             />
             <button className={styles.searchButton} onClick={handleSearchClick}>
               Search
@@ -81,7 +83,7 @@ function Dashboard() {
             <button
               className={styles.clearButton}
               onClick={() => setSelectedGameId(null)}
-              style={{ marginBottom: "1.5rem" }}
+              style={{ marginBottom: '1.5rem' }}
             >
               ← Back to Results
             </button>
@@ -94,11 +96,11 @@ function Dashboard() {
               searchQuery={triggeredSearch}
               onGameClick={(id) => {
                 if (id) {
-                  console.log("Navigating to Game ID:", id);
+                  console.log('Navigating to Game ID:', id);
                   setSelectedGameId(id);
                 } else {
                   console.error(
-                    "Error: Received an undefined ID from the chart click.",
+                    'Error: Received an undefined ID from the chart click.',
                   );
                 }
               }}
@@ -122,11 +124,11 @@ function Dashboard() {
                   filters={activeFilters}
                   onBarClick={(id) => {
                     if (id) {
-                      console.log("Navigating to Game ID:", id);
+                      console.log('Navigating to Game ID:', id);
                       setSelectedGameId(id);
                     } else {
                       console.error(
-                        "Error: Received an undefined ID from the chart click.",
+                        'Error: Received an undefined ID from the chart click.',
                       );
                     }
                   }}
