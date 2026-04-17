@@ -8,10 +8,15 @@ import SemanticSearch from '../SemanticSearch/SemanticSearch';
 
 import styles from './Dashboard.module.css';
 
+interface DashboardProps {
+  user: { name: string; avatar?: string; email: string };
+  onLogout: () => void;
+}
+
 /**
  * Dashboard component that contains the different data visualisation components.
  */
-function Dashboard() {
+function Dashboard({ user, onLogout }: DashboardProps) {
   const [currentGroup, setCurrentGroup] = useState<string>('genre');
   const [activeFilters, setActiveFilters] = useState<IGameFilters>({});
   const [searchQuery, setSearchQuery] = useState<string>('');
@@ -41,6 +46,13 @@ function Dashboard() {
         >
           Game Sales Analytics
         </h1>
+
+        <div className={styles.userInfo}>
+          <span>Welcome, {user.name}</span>
+          <button className={styles.logoutButton} onClick={onLogout}>
+            Logout
+          </button>
+        </div>
 
         <div className={styles.searchContainer}>
           <div className={styles.searchWrapper}>
