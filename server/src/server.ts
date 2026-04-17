@@ -1,3 +1,4 @@
+import 'dotenv/config';
 import { Server } from 'http';
 import { app } from './app.js';
 
@@ -5,8 +6,7 @@ let server: Server | undefined;
 
 export const startServer = async () => {
   try {
-
-    const PORT = process.env.PORT || 3000;
+    const PORT = process.env.PORT || 5000;
 
     server = app.listen(Number(PORT), '0.0.0.0', () => {
       console.log(`Server running at port: ${PORT}`);
