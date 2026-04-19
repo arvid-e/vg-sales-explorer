@@ -9,7 +9,7 @@ import SemanticSearch from '../SemanticSearch/SemanticSearch';
 import styles from './Dashboard.module.css';
 
 interface DashboardProps {
-  user: { name: string; avatar?: string; email: string };
+  user: { username: string; avatar?: string; email?: string };
   onLogout: () => void;
 }
 
@@ -47,14 +47,15 @@ function Dashboard({ user, onLogout }: DashboardProps) {
           Game Sales Analytics
         </h1>
 
-        <div className={styles.userInfo}>
-          <span>Welcome, {user.name}</span>
+        
+
+        <div className={styles.searchContainer}>
+          <div className={styles.userInfo}>
+          <span>{user.username}</span>
           <button className={styles.logoutButton} onClick={onLogout}>
             Logout
           </button>
         </div>
-
-        <div className={styles.searchContainer}>
           <div className={styles.searchWrapper}>
             <input
               type="text"

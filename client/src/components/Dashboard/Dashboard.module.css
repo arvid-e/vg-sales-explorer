@@ -20,6 +20,34 @@
   border-bottom: 1px solid #194011;
 }
 
+.userInfo {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  color: #e6f1ff;
+  font-size: 0.95rem;
+  background-color: #121212;
+  padding: 0.29em 1rem;
+  border-radius: 8px;
+  border: 1px solid #35750a;
+}
+
+.logoutButton {
+  padding: 0.25rem 0.75rem;
+  background-color: #121212;
+  border: 0;
+  color: #10b981;
+  border-radius: 6px;
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.logoutButton:hover {
+  background-color: #396e4a;
+  color: #ffffff;
+}
+
 .title {
   margin: 0;
   font-size: 1.75rem;
@@ -102,8 +130,8 @@
   padding: 0.5rem 1rem;
   background-color: #121212;
   border: 1px solid #35750a;
-  border-right: none; 
-  border-radius: 8px 0 0 8px; 
+  border-right: none;
+  border-radius: 8px 0 0 8px;
   color: #ffffff;
   font-size: 1rem;
   outline: none;
@@ -116,11 +144,11 @@
 
 .searchButton {
   padding: 0.5rem 1.25rem;
-  background-color: #10b981; 
+  background-color: #10b981;
   border: 1px solid #35750a;
-  border-left: none; 
-  border-radius: 0 8px 8px 0; 
-  color: #050505; 
+  border-left: none;
+  border-radius: 0 8px 8px 0;
+  color: #050505;
   font-weight: bold;
   font-size: 1rem;
   cursor: pointer;
@@ -128,7 +156,7 @@
 }
 
 .searchButton:hover {
-  background-color: #34d399; 
+  background-color: #34d399;
 }
 
 .searchSection {
