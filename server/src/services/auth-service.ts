@@ -9,7 +9,15 @@ interface GitHubTokenResponse {
   scope: string;
 }
 
+/**
+ * Service which performs the authentication flow using OAuth 2.0 on GitHub.
+ */
 export class AuthService implements IAuthService {
+
+  /**
+   * Get the authorization URL for GitHub and sets the correct parameters
+   * containing the Client ID and redirect URI.
+   */
   getAuthorizationUrl(): string {
     const rootUrl = 'https://github.com/login/oauth/authorize';
     const state = crypto.randomBytes(16).toString('hex');
@@ -25,6 +33,10 @@ export class AuthService implements IAuthService {
     return `${rootUrl}?${queryString}`;
   }
 
+  /**
+   * Send the verification code from previous step and exchange it for an access token.
+   * @param code - Verification code from GitHub. 
+   */
   exchangeCodeForToken = async (code: string): Promise<string> => {
     const response = await fetch(
       'https://github.com/login/oauth/access_token',
@@ -47,6 +59,10 @@ export class AuthService implements IAuthService {
     return data.access_token;
   };
 
+  /**
+   * Get the user's GitHub profile information using the access token.
+   * @param token - Access token from code exchange.
+   */
   getProviderProfile = async (token: string): Promise<IGitHubProfile> => {
     const response = await fetch('https://api.github.com/user', {
       headers: {
@@ -62,6 +78,11 @@ export class AuthService implements IAuthService {
     return (await response.json()) as IGitHubProfile;
   };
 
+  /**
+   * Syncs the profile info with the locally saved user in the database using an
+   * internal route on the API.
+   * @param profile 
+   */
   syncUserWithApi = async (profile: IGitHubProfile): Promise<IUser> => {
     const response = await fetch(
       `${process.env.API_SERVER_URL}/api/v1/internal/sync-user`,
