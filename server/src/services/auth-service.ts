@@ -1,6 +1,6 @@
 import crypto from 'crypto';
 import type { IAuthService } from '../interfaces/auth/auth-service.js';
-import type { IGitHubProfile } from '../interfaces/auth/profiles.js';
+import type { IGitHubProfile } from '../interfaces/user/profiles.js';
 import type { IUser } from '../interfaces/user/user.js';
 
 interface GitHubTokenResponse {
@@ -13,7 +13,6 @@ interface GitHubTokenResponse {
  * Service which performs the authentication flow using OAuth 2.0 on GitHub.
  */
 export class AuthService implements IAuthService {
-
   /**
    * Get the authorization URL for GitHub and sets the correct parameters
    * containing the Client ID and redirect URI.
@@ -35,7 +34,7 @@ export class AuthService implements IAuthService {
 
   /**
    * Send the verification code from previous step and exchange it for an access token.
-   * @param code - Verification code from GitHub. 
+   * @param code - Verification code from GitHub.
    */
   exchangeCodeForToken = async (code: string): Promise<string> => {
     const response = await fetch(
@@ -79,9 +78,9 @@ export class AuthService implements IAuthService {
   };
 
   /**
-   * Syncs the profile info with the locally saved user in the database using an
+   * Syncs the GitHub profile info with the locally saved user in the database using an
    * internal route on the API.
-   * @param profile 
+   * @param profile - GitHub profile info.
    */
   syncUserWithApi = async (profile: IGitHubProfile): Promise<IUser> => {
     const response = await fetch(

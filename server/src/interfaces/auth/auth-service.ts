@@ -1,5 +1,5 @@
+import type { IGitHubProfile } from '../user/profiles.js';
 import type { IUser } from '../user/user.js';
-import type { IGitHubProfile } from './profiles.js';
 
 export interface IAuthService {
   getAuthorizationUrl(): string;

@@ -6,16 +6,23 @@ import { catchAsync } from '../utils/catch-async.js';
 export class AuthController {
   constructor(private authService: IAuthService) {}
 
+  /**
+   * Starts the login flow by redirecting to the provider's auth URL.
+   */
   login = catchAsync(async (req: Request, res: Response) => {
     const authUrl = this.authService.getAuthorizationUrl();
 
     res.redirect(authUrl);
   });
 
+  /**
+   * Perform the OAuth flow using the verification code from GitHub and
+   * create the session cookie used for API authentication.
+   */
   callback = catchAsync(async (req: Request, res: Response) => {
     const { code } = req.query;
 
-    if (!code) {
+    if (code == null) {
       throw new Error('No authorization code received from GitHub.');
     }
 
