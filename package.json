@@ -3,7 +3,10 @@
   "version": "1.0.0",
   "description": "Frontend dashboard for displaying game sales data and OAuth 2.0",
   "scripts": {
-    "dev": "cd client && npm run dev"
+    "build:server": "cd server && npm run build",
+    "client": "cd client && npm run dev",
+    "server": "cd server && npm run dev",
+    "dev": "concurrently \"npm run server\" \"npm run client\""
   },
   "repository": {
     "type": "git",
@@ -16,5 +19,8 @@
   "bugs": {
     "url": "https://github.com/arvid-e/vg-sales-explorer/issues"
   },
-  "homepage": "https://github.com/arvid-e/vg-sales-explorer#readme"
+  "homepage": "https://github.com/arvid-e/vg-sales-explorer#readme",
+  "devDependencies": {
+    "concurrently": "^9.2.1"
+  }
 }

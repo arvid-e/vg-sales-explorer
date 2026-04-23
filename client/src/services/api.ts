@@ -20,19 +20,20 @@ export const fetchGameSales = async (filters: IGameFilters = {}) => {
   const queryString = params.toString();
   const apiUrl = `/api/v1/games${queryString ? `?${queryString}` : ''}`;
 
-  try {
-    const response = await fetch(apiUrl);
+  const response = await fetch(apiUrl);
 
-    if (!response.ok) {
-      throw new Error(`HTTP error! status: ${response.status}`);
-    }
-
-    const games = await response.json();
-
-    return games.data;
-  } catch (error) {
-    console.error('Could not fetch game sales:', error);
+  if (response.status === 401) {
+    window.location.href = '/login';
+    throw new Error('Unauthorized');
   }
+
+  if (!response.ok) {
+    throw new Error(`HTTP error! status: ${response.status}`);
+  }
+
+  const games = await response.json();
+
+  return games.data;
 };
 
 /**
@@ -41,19 +42,19 @@ export const fetchGameSales = async (filters: IGameFilters = {}) => {
 export const fetchGameDetails = async (id: string): Promise<IGameDetails> => {
   const url = new URL(`/api/v1/games/${id}`, window.location.origin);
 
-  try {
-    const response = await fetch(url);
+  const response = await fetch(url);
 
-    if (!response.ok) {
-      throw new Error(`HTTP error! status: ${response.status}`);
-    }
-    const data = await response.json();
-
-    return Array.isArray(data) ? data[0].data : data.data;
-  } catch (error) {
-    console.error('Could not fetch game sales:', error);
-    throw error;
+  if (response.status === 401) {
+    window.location.href = '/login';
+    throw new Error('Unauthorized');
   }
+
+  if (!response.ok) {
+    throw new Error(`HTTP error! status: ${response.status}`);
+  }
+  const data = await response.json();
+
+  return Array.isArray(data) ? data[0].data : data.data;
 };
 
 /**
@@ -66,21 +67,21 @@ export const fetchGroupedGameSales = async (
   const url = new URL('/api/v1/games/stats', window.location.origin);
   url.searchParams.append('groupBy', group);
 
-  try {
-    const response = await fetch(url.toString());
+  const response = await fetch(url.toString());
 
-    if (!response.ok) {
-      throw new Error(`HTTP error! status: ${response.status}`);
-    }
-    const games = await response.json();
+  if (response.status === 401) {
+    window.location.href = '/login';
+    throw new Error('Unauthorized');
+  }
 
-    if (Array.isArray(games.data)) {
-      return games.data;
-    } else {
-      return [];
-    }
-  } catch (error) {
-    console.error('Could not fetch game sales:', error);
+  if (!response.ok) {
+    throw new Error(`HTTP error! status: ${response.status}`);
+  }
+  const games = await response.json();
+
+  if (Array.isArray(games.data)) {
+    return games.data;
+  } else {
     return [];
   }
 };
