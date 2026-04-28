@@ -15,9 +15,13 @@ This application provides an interactive visualization of video game sales data.
 
 ## Deployed Application
 
-*Provide the link to your publicly accessible application:*
+> URL: https://cu3040.camp.lnu.se/  
 
-> URL: ...
+### Repositories
+> Frontend + Oauth: https://github.com/arvid-e/vg-sales-explorer  
+> API: https://github.com/arvid-e/vg-sales-api  
+> Compose: https://github.com/arvid-e/vg-deploy  
+
 
 ## Requirements
 
@@ -42,9 +46,9 @@ See [all requirements in Issues](../../issues/). Close issues as you implement t
 | Source code documentation | [#4](../../issues/4) | :white_check_mark: |
 | Coding standard | [#5](../../issues/5) | :white_check_mark: |
 | Examiner can follow the creation process | [#6](../../issues/6) | :white_check_mark: |
-| Publicly accessible over the internet | [#7](../../issues/7) | :white_large_square: |
+| Publicly accessible over the internet | [#7](../../issues/7) | :white_check_mark: |
 | Keys and tokens handled correctly | [#8](../../issues/8) | :white_check_mark: |
-| Complete assignment report with correct links | [#9](../../issues/9) | :white_large_square: |
+| Complete assignment report with correct links | [#9](../../issues/9) | :white_check_mark: |
 
 ### VG — AI/ML Feature (optional)
 
