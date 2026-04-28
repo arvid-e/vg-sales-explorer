@@ -5,7 +5,7 @@ import styles from './Login.module.css';
  */
 function Login() {
   const handleLogin = () => {
-    window.location.href = 'http://localhost:5000/api/v1/auth/login';
+    window.location.href = `/auth/login`;
   };
 
   return (

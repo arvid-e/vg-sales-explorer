@@ -19,10 +19,14 @@
     /* Linting */
     "strict": true,
     "noUnusedLocals": true,
-    "noUnusedParameters": true,
+    "noUnusedParameters": false,
     "erasableSyntaxOnly": true,
     "noFallthroughCasesInSwitch": true,
     "noUncheckedSideEffectImports": true
   },
-  "include": ["client/src"]
+  "baseUrl": ".",
+  "paths": {
+    "@/*": ["src/*"]
+  },
+  "include": ["src"]
 }
