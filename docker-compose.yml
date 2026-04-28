@@ -1,0 +1,21 @@
+services:
+  frontend:
+    build: 
+      context: ./client
+      dockerfile: Dockerfile.frontend 
+    restart: always
+    networks:
+      - web-net
+   
+  oauth:
+    build: 
+      context: ./server
+      dockerfile: Dockerfile.oauth
+    restart: always
+    env_file: .env
+    networks:
+      - web-net
+
+networks:
+  web-net:
+    driver: bridge
