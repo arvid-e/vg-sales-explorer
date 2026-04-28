@@ -11,7 +11,6 @@ export class AuthController {
    */
   login = catchAsync(async (req: Request, res: Response) => {
     const authUrl = this.authService.getAuthorizationUrl();
-    console.log("Hit the login route!");
 
     res.redirect(authUrl);
   });
